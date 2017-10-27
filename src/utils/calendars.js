@@ -35,7 +35,7 @@ export default class Calendars {
     rruleStr += data.freq != undefined? 'FREQ='+data.freq+';' : '';
     rruleStr += data.interval != undefined && data.interval? 'INTERVAL='+data.interval+';' : '';
     rruleStr += data.count != undefined && data.count != 0? 'COUNT='+data.count+';' : '';
-    rruleStr += data.untilDate != undefined && data.untilDate? 'UNTIL='+data.untilDate : '';
+    rruleStr += data.untilDate != undefined && data.count == 0? 'UNTIL='+data.untilDate : '';
     if(data.freq){
         googleCalendarUrl += '&recur=RRULE:'+rruleStr;
     }
