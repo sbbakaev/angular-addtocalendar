@@ -57,7 +57,6 @@ export default class Calendars {
     rruleStr += data.interval != undefined && data.interval? 'INTERVAL='+data.interval+';' : '';
     rruleStr += data.count != undefined && data.count != 0? 'COUNT='+data.count+';' : ''
     rruleStr += data.untilDate != undefined && data.count == 0 ? 'UNTIL='+data.untilDate : '';
-    console.log('data1', data);
     if(data.freq){
         rruleStr = 'RRULE:'+rruleStr;
     } else {
@@ -68,11 +67,11 @@ export default class Calendars {
       'VERSION:2.0',
       'BEGIN:VEVENT',
       'CLASS:PUBLIC',
-      'DESCRIPTION:' + Utils.formatIcsText(data.description, 62),
+      'DESCRIPTION:' + Utils.formatIcsText(data.description, 600),
       'DTSTART:' + data.startDate,
       'DTEND:' + data.endDate,
-      'LOCATION:' + Utils.formatIcsText(data.location, 64),
-      'SUMMARY:' + Utils.formatIcsText(data.title, 66),
+      'LOCATION:' + Utils.formatIcsText(data.location, 80),
+      'SUMMARY:' + Utils.formatIcsText(data.title, 80),
       'TRANSP:TRANSPARENT',
       rruleStr,
       'END:VEVENT',
