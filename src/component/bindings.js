@@ -12,5 +12,6 @@ export default {
   useBootstrap: '@',
   freq: '@',
   interval: '@',
-  count: '@'
+  count: '@',
+  onClick: '='
 }

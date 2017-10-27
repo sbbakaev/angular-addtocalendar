@@ -50,10 +50,15 @@ export default class AddtocalendarCtrl {
     };
   }
 
+  onClick() {
+    this.onClick(false);
+  }
+
   dlIcal() {
     let fileName = Utils.getIcsFileName(this.title),
         icsData = this.calendarUrl.icalendar,
         icsBlob = Utils.getIcsBlob(icsData);
+    this.onClick(false);
 
     this.FileSaver.saveAs(icsBlob, fileName);
   }
