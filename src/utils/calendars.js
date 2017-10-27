@@ -66,12 +66,12 @@ export default class Calendars {
       'LOCATION:' + Utils.formatIcsText(data.location, 64),
       'SUMMARY:' + Utils.formatIcsText(data.title, 66),
       'TRANSP:TRANSPARENT',
+      rruleStr,
       'END:VEVENT',
       'END:VCALENDAR',
       'UID:' + Utils.getUid(),
       'DTSTAMP:' + Utils.getTimeCreated(),
-      'PRODID:angular-addtocalendar',
-      rruleStr
+      'PRODID:angular-addtocalendar'
     ].join('\n');
   }
 }
