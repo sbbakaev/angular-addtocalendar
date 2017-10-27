@@ -20,7 +20,7 @@ export default class AddtocalendarCtrl {
   }
 
   setTimesFromFormat() {
-    ['startDate', 'endDate']
+    ['startDate', 'endDate', 'untilDate']
       .forEach(t => {
         this.dates[t] = Utils.toUniversalTime(this[t], this.timezone);
       });

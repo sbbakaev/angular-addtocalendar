@@ -1,6 +1,7 @@
 export default {
   startDate: '@',
   endDate: '@',
+    untilDate: '@',
   title: '@',
   description: '@',
   location: '@',
@@ -8,5 +9,8 @@ export default {
   hoverText: '@',
   className: '@',
   useCaret: '@',
-  useBootstrap: '@'
+  useBootstrap: '@',
+  freq: '@',
+  interval: '@',
+  count: '@'
 }

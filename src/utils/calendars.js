@@ -29,12 +29,31 @@ export default class Calendars {
     googleCalendarUrl += '&text=' + data.title;
     googleCalendarUrl += '&dates=' + data.startDate + '/' + data.endDate;
     googleCalendarUrl += '&details=' + data.description;
-    googleCalendarUrl += '&location=' + data.location;
+    googleCalendarUrl += data.location ? '&location=' + data.location : '';
+
+    let rruleStr = '';
+    rruleStr += data.freq != undefined? 'FREQ='+data.freq+';' : '';
+    rruleStr += data.interval != undefined? 'INTERVAL='+data.interval+';' : '';
+    rruleStr += data.count != undefined && data.count != 0? 'COUNT='+data.count+';' : '';
+    rruleStr += data.untilDate != undefined? 'UNTIL='+data.untilDate : '';
+    if(data.freq){
+        googleCalendarUrl += '&recur=RRULE:'+rruleStr;
+    }
 
     return googleCalendarUrl;
   }
 
   static getIcsCalendar(data) {
+    let rruleStr = '';
+    rruleStr += data.freq != undefined? 'FREQ='+data.freq+';' : '';
+    rruleStr += data.interval != undefined? 'INTERVAL='+data.interval+';' : '';
+    rruleStr += data.count != undefined && data.count != 0? 'COUNT='+data.count+';' : ''
+    rruleStr += data.untilDate != undefined? 'UNTIL='+data.untilDate : '';
+    if(data.freq){
+        rruleStr = 'RRULE:'+rruleStr;
+    } else {
+        rruleStr = '';
+    }
     return [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
@@ -50,7 +69,8 @@ export default class Calendars {
       'END:VCALENDAR',
       'UID:' + Utils.getUid(),
       'DTSTAMP:' + Utils.getTimeCreated(),
-      'PRODID:angular-addtocalendar'
+      'PRODID:angular-addtocalendar',
+      rruleStr
     ].join('\n');
   }
 }
