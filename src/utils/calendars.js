@@ -26,6 +26,10 @@ export default class Calendars {
 
   static getGoogleCalendarUrl(data) {
     var googleCalendarUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
+    if(data.endDate == 'Invalid date'){
+        var epochMs = moment.utc(moment(data.startDate , "YYYYMMDDTHHmmss").add(1, 'hours')).valueOf();
+        data.endDate = moment(epochMs).format('YYYYMMDDTHHmmss');
+    }
     googleCalendarUrl += '&text=' + data.title;
     googleCalendarUrl += '&dates=' + data.startDate + '/' + data.endDate;
     googleCalendarUrl += '&details=' + data.description;
@@ -44,6 +48,10 @@ export default class Calendars {
   }
 
   static getIcsCalendar(data) {
+    if(data.endDate == 'Invalid date'){
+        var epochMs = moment.utc(moment(data.startDate , "YYYYMMDDTHHmmss").add(1, 'hours')).valueOf();
+        data.endDate = moment(epochMs).format('YYYYMMDDTHHmmss');
+    }
     let rruleStr = '';
     rruleStr += data.freq != undefined? 'FREQ='+data.freq+';' : '';
     rruleStr += data.interval != undefined && data.interval? 'INTERVAL='+data.interval+';' : '';
