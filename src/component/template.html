@@ -1,13 +1,15 @@
 <div>
-    <a class="btn" href="data:text/calendar;base64,{{addtocalendar.calendarUrl.icalendar}}">
+    <a class="btn" ng-click="addtocalendar.onClick(false)"
+        href="data:text/calendar;base64,{{addtocalendar.calendarUrl.icalendar}}">
         Save as iCalendar
     </a>
 </div>
 
 <div>
-    <a class="btn" ng-click="addtocalendar.onClick(false)"
-            href="{{addtocalendar.calendarUrl.google}}"
-            target="_blank">
-        Google Calendar
+    <a class="btn"
+       ng-click="addtocalendar.onClick(false)"
+       href="{{addtocalendar.calendarUrl.google}}"
+       target="_blank">
+       Google Calendar
     </a>
 </div>
