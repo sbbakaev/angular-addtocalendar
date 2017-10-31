@@ -1,7 +1,5 @@
 <div>
-    <a class="btn"
-            ng-click="addtocalendar.calendarUrl.dlIcal()"
-            ng-if="addtocalendar.calendarUrl.dlIcal">
+    <a class="btn" href="data:text/calendar;base64,{{addtocalendar.calendarUrl.icalendar}}">
         Save as iCalendar
     </a>
 </div>

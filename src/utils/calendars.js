@@ -58,27 +58,36 @@ export default class Calendars {
     rruleStr += data.count != undefined && data.count != 0? 'COUNT='+data.count+';' : ''
     rruleStr += data.untilDate != undefined && data.count == 0 ? 'UNTIL='+data.untilDate : '';
     if(data.freq){
-        rruleStr = 'RRULE:'+rruleStr;
+        rruleStr = '\r\nRRULE:'+rruleStr;
     } else {
         rruleStr = '';
     }
-    return [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'BEGIN:VEVENT',
-      'CLASS:PUBLIC',
-      'DESCRIPTION:' + Utils.formatIcsText(data.description, 600),
-      'DTSTART:' + data.startDate,
-      'DTEND:' + data.endDate,
-      'LOCATION:' + Utils.formatIcsText(data.location, 80),
-      'SUMMARY:' + Utils.formatIcsText(data.title, 80),
-      'TRANSP:TRANSPARENT',
-      rruleStr,
-      'END:VEVENT',
-      'END:VCALENDAR',
-      'UID:' + Utils.getUid(),
-      'DTSTAMP:' + Utils.getTimeCreated(),
-      'PRODID:angular-addtocalendar'
-    ].join('\n');
+
+    var tmpStr = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:angular-addtocalendar',
+        'BEGIN:VEVENT',
+        'DTSTART:' + data.startDate,
+        'DTEND:' + data.endDate,
+        'SUMMARY:' + Utils.formatIcsText(data.title, 80),
+        'LOCATION:' + Utils.formatIcsText(data.location, 80),
+        'UID:' + Utils.getUid()].join('\r\n');
+      if (rruleStr != ''){
+          tmpStr += rruleStr;
+      };
+      tmpStr += [
+          '\r\nCLASS:PUBLIC',
+          'DESCRIPTION:' + Utils.formatIcsText(data.description, 600),
+          'TRANSP:TRANSPARENT',
+          'DTSTAMP:' + Utils.getTimeCreated(),
+          'END:VEVENT',
+          'END:VCALENDAR'
+      ].join('\r\n');
+
+      return btoa(encodeURIComponent(tmpStr).replace(/%([0-9A-F]{2})/g,
+          function toSolidBytes(match, p1) {
+              return String.fromCharCode('0x' + p1);
+          }));
   }
 }
