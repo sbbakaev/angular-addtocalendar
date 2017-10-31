@@ -51,7 +51,7 @@ export default class AddtocalendarCtrl {
   }
 
   onClick() {
-    this.onClick(false);
+      setTimeout(function() { this.onClick(false); }, 1000);
   }
 
   dlIcal() {

@@ -1,6 +1,9 @@
 <div>
-    <a class="btn" ng-click="addtocalendar.onClick(false)"
-        href="data:text/calendar;base64,{{addtocalendar.calendarUrl.icalendar}}">
+    <a class="btn"
+        ng-init="fileContent=addtocalendar.calendarUrl.icalendar"
+        ng-click="addtocalendar.onClick(false)"
+        href="data:text/calendar;base64,{{fileContent}}"
+        target="_blank">
         Save as iCalendar
     </a>
 </div>
